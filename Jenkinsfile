@@ -20,5 +20,17 @@ pipeline {
       }
     }
     }
+
+    stage('confirm deploy to staging'){
+      steps{
+        timeout(time: 60, unit: 'SECONDS') {
+          input(message: 'Okey to deploy?', ok: 'lets doit!')
+        }
+      }
+    }
+  stage(' Deploy to staging') {
+    steps {
+      echo "deploy to staging"
+    }
   }
 }
