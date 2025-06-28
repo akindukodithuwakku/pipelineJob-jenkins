@@ -3,34 +3,34 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-       echo "build step"
+        echo "build step"
       }
     }
     stage('Test') {
-     parallel {
-      stage('Test On Windows') {
-        steps {
-          echo "Running tests on Windows"
+      parallel {
+        stage('Test On Windows') {
+          steps {
+            echo "Running tests on Windows"
+          }
         }
-      }
-      stage('Test On Linux') {
-        steps {
-          echo "Running tests on Linux"
+        stage('Test On Linux') {
+          steps {
+            echo "Running tests on Linux"
+          }
         }
       }
     }
-    }
-
-    stage('confirm deploy to staging'){
-      steps{
+    stage('Confirm Deploy to Staging') {
+      steps {
         timeout(time: 60, unit: 'SECONDS') {
-          input(message: 'Okey to deploy?', ok: 'lets doit!')
+          input message: 'Okay to deploy?', ok: 'Let\'s do it!'
         }
       }
     }
-  stage(' Deploy to staging') {
-    steps {
-      echo "deploy to staging"
+    stage('Deploy to Staging') {
+      steps {
+        echo "deploy to staging"
+      }
     }
   }
 }
