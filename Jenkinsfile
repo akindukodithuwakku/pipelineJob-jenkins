@@ -3,14 +3,22 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'chmod a+x run_build_script.sh'
-        sh './run_build_script.sh'
+       echo "build step"
       }
     }
     stage('Test') {
-      steps {
-        echo "Run tests"
+     parallel {
+      stage('Test On Windows') {
+        steps {
+          echo "Running tests on Windows"
+        }
       }
+      stage('Test On Linux') {
+        steps {
+          echo "Running tests on Linux"
+        }
+      }
+    }
     }
   }
 }
